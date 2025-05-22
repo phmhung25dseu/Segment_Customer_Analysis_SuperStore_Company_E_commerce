@@ -5,66 +5,72 @@
   However, the Marketing Department has not yet segmented the customers for this year because the dataset is too large to process manually like in previous years. Therefore, they have requested support from the Data Analytics Department to implement a segmentation model to categorize each customer, enabling the deployment of appropriate marketing programs for each group.
   The Marketing Director has also proposed using the RFM model. In the past, when the company was smaller, the team could calculate and classify segments using Excel. But now, with the large volume of data, they hope the Data Department can develop a segmentation pipeline using Python programming.
 ## II. Objective
-  The objective of this project is to:
-  Develop an automated customer segmentation system using the RFM (Recency, Frequency, Monetary) model with Python to support targeted marketing campaigns.
-_**🔍 Key Goals:**_
-1.	Segment Customers: Classify customers into distinct groups based on their purchasing behavior.
-2.	Enable Targeted Marketing: Help the Marketing Department deploy customized campaigns for:
+## 🎯 Project Objective
 
-o	Loyal customers (retention and appreciation)
+Develop an **automated customer segmentation system** using the **RFM (Recency, Frequency, Monetary)** model with Python to support **targeted marketing campaigns**.
 
-o	Potential loyal customers (conversion)
+---
 
-o	Inactive or at-risk customers (re-engagement).
+## 🔑 Key Goals
 
-3.	Automate the Process: Replace manual segmentation (previously done in Excel) with a scalable, efficient Python-based solution.
-4.	Support Data-Driven Decisions: Provide insights and visualizations to help the marketing team understand customer value and engagement.
+### 1. Segment Customers
+Classify customers into distinct groups based on their purchasing behavior.
+
+### 2. Enable Targeted Marketing
+Help the Marketing Department deploy customized campaigns for:
+
+-  **Loyal Customers** – *Retention and appreciation*
+-  **Potential Loyal Customers** – *Conversion strategies*
+- **Inactive or At-Risk Customers** – *Re-engagement tactics*
+
+### 3. Automate the Process
+Replace manual segmentation (previously done in Excel) with a **scalable, efficient Python-based solution**.
+
+### 4. Support Data-Driven Decisions
+Provide **insights and visualizations** to help the marketing team understand customer value and engagement.
+
 ## III. Methods
-_**📊 What is RFM Analysis?**_
-RFM Analysis is a customer segmentation technique used in marketing and analytics to evaluate customer value based on three key factors:
 
-Metric	Description
+### What is RFM Analysis?
 
-Recency (R): 	How recently a customer made a purchase. More recent = more engaged.
+**RFM Analysis** is a customer segmentation technique used in marketing and analytics to evaluate customer value based on three key factors:
 
-Frequency (F): 	How often a customer makes a purchase. More frequent = more loyal.
+#### Metric Descriptions:
+- **Recency (R):** How recently a customer made a purchase.  
+  *More recent = more engaged.*
+- **Frequency (F):** How often a customer makes a purchase.  
+  *More frequent = more loyal.*
+- **Monetary (M):** How much money a customer has spent.  
+  *Higher spend = more valuable.*
 
-Monetary (M): 	How much money a customer has spent. Higher spend = more valuable.
-________________________________________
-_**💡 Why Use RFM Analysis?**_
-1.	Simple and Effective Segmentation
+---
 
-RFM uses real behavioral data (transactions), not surveys or guesswork, to group customers.
+### Why Use RFM Analysis?
 
-2.	Identify High-Value Customers
+1. **Simple and Effective Segmentation**  
+   RFM uses real behavioral data (transactions), not surveys or guesswork, to group customers.
 
-Quickly find:
-  o	VIPs (recent, frequent, high spenders)
-  
-  o	At-risk customers (haven’t bought recently)
-  
-  o	New customers
-  
-  o	Bargain hunters (frequent but low spend)
-3.	Targeted Marketing
-Tailor campaigns based on customer type:
+2. **Identify High-Value Customers**  
+   Quickly find:
+   - VIPs (recent, frequent, high spenders)  
+   - At-risk customers (haven’t bought recently)  
+   - New customers  
+   - Bargain hunters (frequent but low spend)
 
-o	Rewards for loyal customers
+3. **Targeted Marketing**  
+   Tailor campaigns based on customer type:
+   - Rewards for loyal customers  
+   - Win-back strategies for inactive ones  
+   - Intro offers for new customers
 
-o	Win-back strategies for inactive ones
+4. **Better ROI**  
+   Focus marketing efforts where they matter most, instead of using generic mass campaigns.
 
-o	Intro offers for new customers
-
-4.	Better ROI
-
-Focus marketing efforts where they matter most, instead of using generic mass campaigns.
-
-5.	Scalable & Data-Driven
-
-Easy to implement with large datasets using Python or SQL, and adaptable across industries (retail, e-commerce, SaaS, etc.)
+5. **Scalable & Data-Driven**  
+   Easy to implement with large datasets using **Python** or **SQL**, and adaptable across industries (retail, e-commerce, SaaS, etc.)
 
 ## IV. Process
-**1. Import libraries and data**
+### 1. Import libraries and data
 
 _**+ Import libraries**_
 
@@ -97,8 +103,8 @@ cus_retail.to_csv(path + 'ecommerce.csv', index=False)
 seg.to_csv(path + 'segmentation.csv', index=False)
 ```
 
-**2. EDA – Exploration Data Analysis**
-_**2.1. Generate Data Profiling Report**_
+### 2. EDA – Exploration Data Analysis
+#### 2.1. Generate Data Profiling Report
 ```python
 !pip install ydata-profiling
 
@@ -113,14 +119,14 @@ profile.to_notebook_iframe()
 ![image](https://github.com/user-attachments/assets/6a9c07c3-800e-4142-b8b1-225e3288178c)
 ![image](https://github.com/user-attachments/assets/b1440196-f9f2-40b7-b413-186d8b442858)
 
-_**2.2. Check data type**_
+#### 2.2. Check data type
 ```python
 #Checking the information of df
 cus_retail.info()
 ```
 ![image](https://github.com/user-attachments/assets/a4ae0a2a-e7a4-4563-b10f-5a80a7135133)
 
-_**2.3. Check missing value**_
+#### 2.3. Check missing value
 ```python
 #Counting number of missing value in each column
 Cus_retail_na = cus_retail.isna().sum()
@@ -140,8 +146,8 @@ _**Notes:**_
 
 •	Datatype of CustomerID is not true, needing convert datatype to int64.
 
-**3. Clean data**
-_**3.1. Delete missing value**_
+### 3. Clean data
+#### 3.1. Delete missing value
 ```python
 #Drop missing value
 cus_retail.dropna(subset=['CustomerID'], inplace=True)
@@ -152,7 +158,7 @@ cus_retail.isna().sum()
 ```
 ![image](https://github.com/user-attachments/assets/aaf67f15-959e-4f54-9a35-38183c9a5b16)
 
-_**3.2. Convert data type of CustomerID**_
+#### 3.2. Convert data type of CustomerID
 ```python
 #Convert datatype CustomerID to int
 cus_retail['CustomerID'] = cus_retail['CustomerID'].astype(int)
@@ -164,13 +170,13 @@ cus_retail.info()
 ```
 ![image](https://github.com/user-attachments/assets/0ca00a3b-a1eb-4f7d-8b18-36ed6536f686)
 
-3.3. Remove quantities less than 0
+#### 3.3. Remove quantities less than 0
 ```python
 #Remove cancel order
 cus_retail = cus_retail[cus_retail['Quantity']>0]
 cus_retail.shape
 ```
-4. Segment Analyst
+### 4. Segment Analyst
 ```python
 #Datetime now
 present = dt.date(2011,12,31)
@@ -213,7 +219,7 @@ _**+ Result**_
 ![image](https://github.com/user-attachments/assets/c99770fa-91d2-4384-bf96-8651b3ff47aa)
 
 ## V. Results
-**1. Retention Customer**
+### 1. Retention Customer
 _**+ Code**_
 ```python
 #function for month
@@ -256,57 +262,55 @@ _**+ Result**_
 
 ![image](https://github.com/user-attachments/assets/fe9b6ce7-7165-4ccc-a2a4-73a9e44071fa)
 
-_**🔍 Key Observations**_
-1.	Initial Drop-off:
+### 1. Initial Drop-off
+- All cohorts start with 100% (by definition).
+- The steepest drop-off typically occurs between Month 1 and Month 2, which is common in user behavior analytics.
 
-o	All cohorts start with 100% (by definition).
+### 2. December 2010 Cohort is Exceptional
+- This cohort shows relatively strong and consistent retention over time.
+- It has the highest long-term retention, with noticeable bumps at:
+  - Month 6 (40%)
+  - Month 10 (40%)
+  - Month 11 (50%)
 
-o	The steepest drop-off typically occurs between Month 1 and Month 2, which is common in user behavior analytics.
+### 3. Recent Cohorts (Late 2011)
+- These cohorts have fewer data points (as they joined more recently).
+- However, they also show a weaker retention trend, with retention dropping to 11% or lower by the second or third month.
 
-2.	December 2010 Cohort is Exceptional:
-
-o	This cohort shows relatively strong and consistent retention over time.
-
-o	It has the highest long-term retention, with noticeable bumps at Month 6 (40%), Month 10 (40%), and Month 11 (50%).
-
-3.	Recent Cohorts (Late 2011):
-
-o	These cohorts have fewer data points (as they joined more recently).
-
-o	However, they also show a weaker retention trend, with retention dropping to 11% or lower by the second or third month.
-
-4.	Mid-Year 2011 Cohorts:
-
-o	May, June, and July 2011 cohorts show slight improvements in Month 5-6 retention (e.g., June 2011 has 33% in Month 6), but this is not sustained.
-
-_**💬 Discussion and Implications**_
-•	Product Changes or Marketing Shifts?
-
-  o	The December 2010 cohort's strong retention might suggest a period of particularly effective onboarding, product quality, or targeted user acquisition.
+### 4. Mid-Year 2011 Cohorts
+- May, June, and July 2011 cohorts show slight improvements in Month 5–6 retention.
+  - For example, June 2011 shows 33% retention in Month 6.
+- However, this improvement is not sustained in later months.
   
-  o	What changed in 2011 that might have caused lower retention? This is worth investigating—perhaps a change in user acquisition strategy or product updates.
-  
-•	User Engagement Strategies Needed:
+### Product Changes or Marketing Shifts?
 
-  o	The steep drop-off in most cohorts suggests that users lose interest quickly.
-  
-  o	Improving early engagement (onboarding, education, feature exposure) could improve these metrics.
-  
-•	Cohort Analysis Utility:
+- The December 2010 cohort's strong retention might suggest a period of particularly effective onboarding, product quality, or targeted user acquisition.
 
-  o	This kind of visualization is excellent for identifying long-term trends, seasonality, or the impact of interventions.
-  
-  o	It’s a critical tool for SaaS, mobile apps, and any recurring usage product.
+- What changed in 2011 that might have caused lower retention? This is worth investigating—perhaps a change in user acquisition strategy or product updates.
 
-_**✅ Recommendations**_
+### User Engagement Strategies Needed
 
-•	Analyze December 2010 cohort more closely—what worked, and can it be replicated?
+- The steep drop-off in most cohorts suggests that users lose interest quickly.
 
-•	Implement onboarding improvements and track cohort changes over time.
+- Improving early engagement (onboarding, education, feature exposure) could improve these metrics.
 
-•	Consider segmenting by user type, acquisition source, or geography to find more insights.
+### Cohort Analysis Utility
 
-_**2. Recency value, Frequency value, Monetary value**_
+- This kind of visualization is excellent for identifying long-term trends, seasonality, or the impact of interventions.
+
+- It is a critical tool for SaaS, mobile apps, and any recurring usage product.
+
+---
+
+## VI. Recommendations
+
+- Analyze the December 2010 cohort more closely—what worked, and can it be replicated?
+
+- Implement onboarding improvements and track cohort changes over time.
+
+- Consider segmenting by user type, acquisition source, or geography to find more insights.
+
+### 2. Recency value, Frequency value, Monetary value
 _**+ Code**_
 ```python
 #Histogram
@@ -327,73 +331,62 @@ _**+ Result**_
 ![image](https://github.com/user-attachments/assets/6ba4a306-67fb-4aa5-92d3-d152ca8c08e3)
 ![image](https://github.com/user-attachments/assets/4358c84c-8181-4aff-99f6-3e1a1dcdf022)
 
-_**🔍 Key Observations**_
+## Key Observations
 
-_**📊 1. Distribution of R_value (Recency)**_
+### 1. Distribution of R_value (Recency)
 
-•	Shape: Right-skewed distribution.
+**Shape:** Right-skewed distribution.
 
-•	Interpretation:
+**Interpretation:**
+- A large number of customers have low R values, meaning they purchased recently.
+- Fewer customers have higher R values, indicating less recent activity.
 
-  o	A large number of customers have low R values, meaning they purchased recently.
+**Insight:**
+- The business likely retains a good portion of active or recently engaged customers.
+- However, there's a long tail of inactive users, suggesting a need for re-engagement strategies.
 
-  o	Fewer customers have higher R values, indicating less recent activity.
+---
 
-•	Insight:
+### 2. Distribution of F_value (Frequency)
 
-  o	The business likely retains a good portion of active or recently engaged customers.
+**Shape:** Heavily right-skewed with a sharp drop-off.
 
-  o	However, there's a long tail of inactive users, suggesting a need for re-engagement strategies.
+**Interpretation:**
+- The vast majority of users make very few purchases.
+- A small number of users are very frequent purchasers, visible as the long tail.
 
-_**📊 2. Distribution of F_value (Frequency)**_
+**Insight:**
+- This is a typical “power law” distribution in e-commerce or subscription services.
+- Consider identifying and nurturing high-frequency users—they could be VIPs or loyal customers.
 
-•	Shape: Heavily right-skewed with a sharp drop-off.
+### 3. Distribution of M_value (Monetary)
 
-•	Interpretation:
+**Shape:** Extremely right-skewed, even more so than Frequency.
 
-  o	The vast majority of users make very few purchases.
+**Interpretation:**
+- Most customers spend small amounts.
+- A few customers spend significantly more, leading to a long tail stretching past 250,000 in value.
 
-  o	A small number of users are very frequent purchasers, visible as the long tail.
+**Insight:**
+- Indicates the presence of high-value customers who may account for a disproportionate share of revenue (Pareto principle).
+- Segmenting and giving special attention to these high-M customers could boost lifetime value.
 
-•	Insight:
+---
 
-  o	This is a typical “power law” distribution in e-commerce or subscription services.
+### Overall Commentary
 
-  o	Consider identifying and nurturing high-frequency users—they could be VIPs or loyal customers.
+- Skewed distributions in all three RFM components are typical and valuable:
 
-_**📊 3. Distribution of M_value (Monetary)**_
+  - They allow tiered segmentation (e.g., Low / Medium / High).
+  - They support targeted marketing campaigns (e.g., re-engage high-R, reward high-F and high-M customers).
 
-•	Shape: Extremely right-skewed, even more than Frequency.
+- Combining RFM values can help define useful customer personas such as:
+  - **Champions** – Low Recency, High Frequency, and High Monetary.
+  - **At-risk** – High Recency, with previously High Frequency or Monetary.
+  - **Potential Loyalists** – Low Recency, Moderate Frequency.
 
-•	Interpretation:
 
-  o	Most customers spend small amounts.
-  
-  o	A few customers spend significantly more, leading to a long tail stretching past 250,000 in value.
-  
-•	Insight:
-
-  o	Indicates the presence of high-value customers who may account for a disproportionate share of revenue (Pareto principle).
-  
-  o	Segmenting and giving special attention to these high-M customers could boost lifetime value.
-
-_**💡 Overall Commentary:**_
-
-•	Skewed distributions in all three RFM components are typical and valuable:
-
-  o	Allow tiered segmentation (e.g., Low/Medium/High).
-
-  o	Help in targeting marketing campaigns (e.g., re-engage high-R, reward high-F and high-M).
-
-•	Combining RFM values can guide you in building customer personas like:
-
-  o	“Champions” – low R, high F and M.
-
-  o	“At-risk” – high R, previously high F or M.
-
-  o	“Potential loyalists” – low R, moderate F.
-
-_**3. Contribution by Segment**_
+### 3. Contribution by Segment
 _**+ Code**_
 ```python
 # Define colors for each segment
@@ -418,28 +411,32 @@ plt.show()
 _**+ Result**_
 ![image](https://github.com/user-attachments/assets/8325b570-ded2-4490-b39d-c6ad21a8d6d8)
 
-_**🔍 Key Observations**_
+## Key Observations and Strategic Insights
 
-_**🧠 Strategic Takeaways**_
+### Strategic Takeaways
 
-•	The largest segments are "Hibernating" and "Champions", indicating a split between highly engaged and disengaged users. A clear sign of engagement polarity.
+- The largest segments are "Hibernating" and "Champions", indicating a clear split between highly engaged and disengaged users — a sign of engagement polarity.
 
-•	With nearly 10% "At Risk" and 10% "Lost Customers", retention strategies should be a top priority.
+- With nearly 10% in "At Risk" and another 10% in "Lost Customers", improving retention should be a top priority.
 
-•	"Potential Loyalists" and "New Customers" together make up nearly 19%—these are key targets for growth and conversion to "Champions".
+- "Potential Loyalists" and "New Customers" together make up nearly 19% of users. These are crucial segments for growth and potential conversion into "Champions".
 
-•	Small but important segments like "Cannot Lose Them" (2.01%) may require bespoke outreach given their past value.
+- Smaller but high-value segments like "Cannot Lose Them" (2.01%) may require targeted, high-touch strategies to prevent churn.
 
-_**✅ Actionable Summary**_
-•	Double down on "Champions" and "Loyal" to retain high-value users.
+---
 
-•	Rescue "At Risk" and "Hibernating" with personalized engagement.
+### Actionable Summary
 
-•	Convert "Potential Loyalists" and "Promising" into long-term customers.
+- Focus on retaining high-value segments such as "Champions" and "Loyal" customers.
 
-•	Use automation to re-engage "Lost" or "About to Sleep" cohorts efficiently.
+- Develop personalized engagement strategies to recover "At Risk" and "Hibernating" users.
 
-_**4. Segment by Spending**_
+- Create conversion campaigns aimed at turning "Potential Loyalists" and "Promising" users into long-term, loyal customers.
+
+- Leverage automation tools to efficiently re-engage "Lost" or "About to Sleep" cohorts at scale.
+
+
+### 4. Segment by Spending
 _**+ Code**_
 ```python
 # Calculating spending (M_value) each segment
@@ -488,26 +485,30 @@ plt.show()
 _**+ Result**_
 ![image](https://github.com/user-attachments/assets/41f9923f-f043-41ea-bd11-cf873a8a91a0)
 
-_**🔍 Key Observations**_
-_**📉 Strategic Contrast to Customer Count**_
+## Key Observations and Revenue Insights
 
-•	While Champions are only ~18% of customers, they bring in 61% of the revenue.
+### Strategic Contrast to Customer Count
 
-•	Segments like Hibernating (18.6% of customers) only account for 4% of spending, confirming that not all customer segments are equally valuable.
+- While "Champions" make up only about 18% of customers, they contribute approximately 61% of total revenue.
 
-•	High-potential segments (e.g., Potential Loyalists, Promising) are underperforming in revenue and may need nudging to unlock growth.
+- Segments like "Hibernating" (18.6% of customers) account for only 4% of revenue, demonstrating that customer count does not equate to value.
 
-_**✅ Strategic Recommendations**_
+- High-potential segments such as "Potential Loyalists" and "Promising" are underperforming in terms of revenue, indicating a need for activation strategies to unlock their growth potential.
 
-•	Double down on Champions with VIP experiences, loyalty programs, and retention efforts.
+---
 
-•	Rescue high-spending "At Risk" and "Cannot Lose Them" customers with win-back campaigns—these are proven high-value clients.
+## Strategic Recommendations
 
-•	Develop "Potential Loyalists" and "Promising" segments through targeted promotions or early loyalty rewards.
+- Prioritize "Champions" by offering VIP experiences, loyalty programs, and other retention-focused efforts.
 
-•	Deprioritize or automate engagement for Lost/New/Low-contributing segments, unless cost-effective.
+- Focus win-back campaigns on high-value but declining segments like "At Risk" and "Cannot Lose Them" to recover proven contributors.
 
-_**5. Segmentation by Frequency**_
+- Nurture "Potential Loyalists" and "Promising" customers with targeted promotions and early loyalty incentives to encourage long-term retention.
+
+- Consider deprioritizing or automating engagement for segments such as "Lost", "New", or other low-contributing groups—unless specific strategies prove cost-effective.
+
+
+### 5. Segmentation by Frequency
 _**+ Code**_
 ```python
 # Calculate the average frequency of purchases for each segment
@@ -529,23 +530,27 @@ plt.show()
 ```
 + Result
 ![image](https://github.com/user-attachments/assets/1bb7518e-0a31-450b-8d3a-5c4542fcb906)
-_**🔍 Strategic**_
+## Strategic Frequency Insights
 
-1.	Champions dominate in purchase activity—your top-tier loyalty builders.
+1. **Champions dominate in purchase activity**  
+   These are your top-tier loyalty builders.  
+   - Their high engagement makes them ideal for:
+     - Upselling opportunities
+     - Beta testing new features or products
+     - Referral programs
+     - Feedback loops to improve the customer experience
 
-o	Their high engagement makes them ideal for upselling, beta testing, referrals, and feedback loops.
+2. **Loyal and At Risk customers also show substantial frequency**  
+   - "At Risk" users may not have recent activity, but they have a history of frequent purchases.  
+   - This group presents a strong opportunity for targeted re-engagement before they are lost entirely.
 
-2.	Loyal and At Risk customers show substantial frequency too:
+3. **Potential Loyalists have strong frequency**  
+   - These customers are excellent candidates to be nurtured into future Champions through thoughtful retention strategies.
 
-o	“At Risk” users may not be recent but are still quite active—a good opportunity for targeted re-engagement.
+4. **Segments with frequency below 25 (e.g., Hibernating, Promising, Lost)**  
+   - These segments require automation-based nurturing or reactivation campaigns.  
+   - Evaluate whether marketing investment in these groups is justified based on historical return rates.
 
-3.	Potential Loyalists have strong frequency and are excellent candidates to nurture into Champions.
-  
-4.	Segments below 25 frequency (e.g., Hibernating, Promising, Lost):
-
-o	Require automation-based nurturing or reactivation campaigns.
-
-o	Consider whether it's worth investing marketing dollars here based on historical return rates.
 
 _**📌 Strategy Table**_
 
@@ -560,7 +565,7 @@ _**📌 Strategy Table**_
 | Promising / New                    | Educate & incentivize                             |
 | Hibernating / Lost / About to Sleep| Low-cost automated win-back or re-targeting       |
 
-_**6. Segmentation by Recency**_
+### 6. Segmentation by Recency
 _**+ Code**_
 ```python
 # Calculate the average recency (days since last purchase) for each segment
@@ -585,12 +590,14 @@ plt.show()
 _**+ Result**_
 ![image](https://github.com/user-attachments/assets/b6470262-b03d-4ad6-8509-6c1b896c589e)
 
-_**🔍 Key Observations**_
-•	Champions, Promising, and Potential Loyalists show low recency, suggesting recent, healthy engagement.
+## Key Observations on Recency
 
-•	At Risk, Hibernating, and Cannot Lose Them have not been active for over 170 days and represent priority segments for re-engagement.
+- "Champions", "Promising", and "Potential Loyalists" have low recency values, indicating recent and healthy engagement. These users are actively interacting with the business.
 
-•	Lost Customers likely require cost-sensitive or last-chance offers due to their long inactivity.
+- "At Risk", "Hibernating", and "Cannot Lose Them" segments have not been active for over 170 days. These groups should be prioritized for re-engagement campaigns.
+
+- "Lost Customers" show extended inactivity and may only respond to cost-sensitive or last-chance offers. Resource allocation for this segment should be carefully considered.
+
 
 _**📌 Strategy Table**_
 | Segment                                  | Recency Status        | Recommended Action                               |
@@ -601,7 +608,7 @@ _**📌 Strategy Table**_
 | At Risk / Hibernating / Cannot Lose Them | High                  | Prioritize win-back campaigns                    |
 | Lost Customers                           | Very high (churned)   | Final reactivation attempt or sunset             |
 
-_**7. Top 5 segment by revenue**_
+### 7. Top 5 segment by revenue
 _**+ Code**_
 ```python
 # Group by 'Segment' and sum the 'M_value'
@@ -640,22 +647,20 @@ _**+ Result**_
 
 ![image](https://github.com/user-attachments/assets/bb60feb6-a34c-4ca7-9be5-606af997d531)
 
-🔍 Strategic 
-Champions alone contribute over five times more revenue than Loyal customers, reaffirming the need for:
+## Strategic Revenue Insights
 
-  o	Exclusive perks
-  
-  o	Upsell/cross-sell offers
-  
-  o	Priority support and recognition
-  
-•	At Risk segment holds enormous recovery potential:
+- **Champions** alone contribute over five times more revenue than **Loyal** customers. This highlights the importance of:
+  - Offering exclusive perks and benefits
+  - Designing upsell and cross-sell opportunities
+  - Providing priority support and recognition to reinforce loyalty
 
-  o	They are disengaging but still profitable—target them urgently with win-back campaigns.
+- The **At Risk** segment holds significant recovery potential:
+  - These customers are starting to disengage but remain profitable
+  - Implement urgent win-back campaigns to retain their value
 
-•	Need Attention and Hibernating segments together bring in over $650k, suggesting:
-
-  o	There's meaningful value in nurturing mid-tier customers with behavioral nudges or dynamic discounts.
+- **Need Attention** and **Hibernating** segments collectively generate over $650,000 in revenue:
+  - This suggests there is meaningful value in nurturing these mid-tier customers
+  - Behavioral nudges, targeted messaging, and dynamic discount strategies can help re-engage this group effectively.
 
 _**✅ Action**_
 | Segment        | Action                                                                 |
@@ -666,7 +671,7 @@ _**✅ Action**_
 | Need Attention | Trigger-based engagement (e.g., abandoned cart, inactivity emails)     |
 | Hibernating    | Reactivation with incentives or exit surveys                           |
 
-_**8. Top 5 segment by transactions**_
+### 8. Top 5 segment by transactions
 _**+ Code**_
 ```python
 # Group by 'Segment' and sum the 'F_value'
@@ -705,23 +710,23 @@ _**+ Result**_
 ![image](https://github.com/user-attachments/assets/a9df73ff-7a4d-43c4-a78b-b87b9ee3aba5)
 
 
-_**📈 Strategic**_
-•	Champions generate more than 4x the transactions of Loyal customers, confirming they are the engine of your business.
+## Strategic Transaction Insights
 
-  o	Prioritize experience enhancement, loyalty rewards, and product recommendations.
+- **Champions** generate more than four times the number of transactions compared to **Loyal** customers.  
+  - This confirms they are a core driver of business performance.
+  - Focus on enhancing their experience with loyalty rewards, personalized product recommendations, and exclusive offers.
 
-•	At Risk and Potential Loyalists:
+- **At Risk** and **Potential Loyalists** show strong activity levels:
+  - These segments represent significant growth potential if re-engaged effectively.
+  - Consider using segment-specific email workflows or retargeting campaigns to move them toward becoming "Loyal" or even "Champions".
 
-  o	Their strong activity levels indicate substantial upside if re-engaged or nurtured into loyalty.
+- **Hibernating** customers demonstrate unexpected transactional activity for a segment considered disengaged:
+  - This is a key signal that they are not fully lost.
+  - Launch behavior-driven campaigns to reignite engagement and prevent churn.
 
-  o	Segment-specific email flows or retargeting campaigns could help them graduate to "Loyal" or "Champions."
-
-•	Hibernating customers are surprisingly active for a disengaged segment:
-
-  o	Use this as a signal—they're not lost yet. Re-engage with behavior-driven campaigns.
 
 ## VI. Insights
-_**1. Overview**_
+### 1. Overview
 | Segment                        | Total Customer | Avg. Recency (Days) | Avg. Purchase Frequency | Avg. Monetary Value | Actions                                                                                   |
 |-------------------------------|----------------|----------------------|--------------------------|---------------------|--------------------------------------------------------------------------------------------|
 | Champions (17%)               | 799            | **32.86**            | **286.87**               | 6824.64             | Most loyal, active, and valuable customers. Provide VIP perks, exclusive access, and reward loyalty. |
@@ -736,7 +741,7 @@ _**1. Overview**_
 | Hibernating (18%)             | 808            | 171.08               | 23.24                    | 403.48              | Once-engaged but now cold. Offer “come back” incentives or ask why they dropped off.       |
 | Lost Customers (9%)           | 424            | **300.58**           | 11.68                    | 170.59              | Highly inactive, least value. Low priority, but test win-back with strong reactivation offer. |
 
-_**2. 🧩 Customer Count (Tree Map - RFM Segments by Count)**_
+### 2. Customer Count (Tree Map - RFM Segments by Count)
 
 _- **Largest Segments**:_
   - `Hibernating`: **18.62%**
@@ -750,7 +755,7 @@ _- **Insight**:  _
 
 ---
 
-_**3. 💰 Revenue Contribution**_
+### 3. 💰 Revenue Contribution
 - _**Champions**_ generate **~61%** of total revenue — your **most valuable segment**.
 - `Loyal Customers`: contribute ~**$1M**
 - `At Risk`: ~**$660K**
@@ -758,7 +763,7 @@ _**3. 💰 Revenue Contribution**_
   - `New`
   - `Promising`
   - `Lost`
-_**4. 🔁 Frequency** _ 
+### 4. 🔁 Frequency
 _- **Highest frequency**:_
   - `Champions`: **286.87**
   - `Loyal Customers`: **121.65**
@@ -779,7 +784,7 @@ _- **Long inactive**:_
   - `At Risk`
 _- **Opportunity**:  _
   - `Hibernating`: **171 days** – still recoverable with targeted reactivation campaigns.
-_**6. 🔝 Top 5 Segments by Transactions**_
+### 6. 🔝 Top 5 Segments by Transactions
 
 _- **Champions**_: ~**229K transactions** — lead by a large margin.
 - Followed by:
